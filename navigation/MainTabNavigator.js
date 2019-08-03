@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import InvoiceScreen from '../screens/Invoice';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -65,12 +66,27 @@ SettingsStack.navigationOptions = {
   ),
 };
 
+const InvoiceStack = createStackNavigator(
+  {
+    Invoice: InvoiceScreen,
+  },
+  config
+);
+
+InvoiceStack.navigationOptions = {
+  tabBarLabel: 'Invoice ',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-rocket' : 'md-rocket'} />
+  ),
+};
+
 SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+  InvoiceStack,
 });
 
 tabNavigator.path = '';
